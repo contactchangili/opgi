@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPGI Promotion تبسة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f8f5f0;
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #7c5c3b;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+
+    nav {
+      background-color: #a77d50;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      animation: fadeIn 1.5s ease-out;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: linear-gradient(90deg, #7c5c3b, #a77d50, #7c5c3b);
+    }
+
+    .container {
+      padding: 2rem;
+      animation: fadeIn 1.8s ease-out;
+    }
+
+    .projects, .about, .contact {
+      margin-bottom: 3rem;
+    }
+
+    .projects h2, .about h2, .contact h2 {
+      color: #7c5c3b;
+      position: relative;
+      padding-bottom: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .projects h2::after, .about h2::after, .contact h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to left, #7c5c3b, #a77d50);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .project-img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      height: 220px;
+    }
+
+    .project img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project:hover img {
+      transform: scale(1.05);
+    }
+
+    .project h3 {
+      color: #7c5c3b;
+      margin-top: 1rem;
+      transition: color 0.3s;
+    }
+
+    .project:hover h3 {
+      color: #a77d50;
+    }
+
+    .project p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .project button {
+      background: linear-gradient(to right, #7c5c3b, #a77d50);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .project button:hover {
+      background: linear-gradient(to right, #a77d50, #7c5c3b);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .project button:active {
+      transform: translateY(1px);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      text-align: right;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: scale(0.9);
+      opacity: 0;
+      animation: fadeIn 0.3s ease-out forwards, pulse 0.3s 0.3s ease-out forwards;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #7c5c3b;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 0.5rem;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+
+    form input:focus, form select:focus, form textarea:focus {
+      border-color: #a77d50;
+      box-shadow: 0 0 0 3px rgba(167, 125, 80, 0.2);
+      outline: none;
+    }
+
+    form button {
+      background: linear-gradient(to right, #7c5c3b, #a77d50);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+      margin-top: 1rem;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    form button:hover {
+      background: linear-gradient(to right, #a77d50, #7c5c3b);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #f0f0f0;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .close-btn:hover {
+      background: #e0e0e0;
+      transform: rotate(90deg);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.8rem;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .social-icons a:hover {
+      color: #ffd700;
+      transform: translateY(-3px) scale(1.1);
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      margin-top: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    iframe:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .about-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .feature-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-top: 2rem;
+      transition: all 0.3s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .feature-box i {
+      font-size: 2.5rem;
+      color: #a77d50;
+      margin-bottom: 1rem;
+    }
+
+    .feature-box h3 {
+      color: #7c5c3b;
+      margin-bottom: 1rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    footer {
+      padding: 2rem 1rem;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: linear-gradient(90deg, #7c5c3b, #a77d50, #7c5c3b);
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: linear-gradient(to right, #7c5c3b, #a77d50);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 99;
+      transition: all 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 300px;
+        font-size: 2rem;
+      }
+      
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>OPGI Promotion تبسة</h1>
+  <p>الريادة في التطوير العقاري بولاية تبسة</p>
+</header>
+
+<nav>
+  <a href="#projects">مشاريعنا</a>
+  <a href="#about">من نحن</a>
+  <a href="#contact">اتصل بنا</a>
+</nav>
+
+<div class="hero">
+  <div>تطوير عقاري متميز يناسب احتياجاتك</div>
+</div>
+
+<div class="container">
+  <section id="projects" class="projects">
+    <h2>مشاريعنا</h2>
+    
+    <div class="project-grid">
+      <div class="project">
+        <div class="project-img-container">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="سكن اجتماعي">
+        </div>
+        <h3>مشروع 150 سكن اجتماعي</h3>
+        <p>الموقع: طريق قسنطينة، تبسة — السعر: 3,200,000 دج</p>
+        <p>مساحة تتراوح بين 60 و75 متر مربع، تصميم عصري يتلاءم مع احتياجات الأسرة الجزائرية.</p>
+        <button onclick="openModal('مشروع 150 سكن اجتماعي')">اطلب الآن</button>
+      </div>
+
+      <div class="project">
+        <div class="project-img-container">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="سكن ترقوي مدعم">
+        </div>
+        <h3>مشروع 200 سكن ترقوي مدعم</h3>
+        <p>الموقع: بئر العاتر — السعر: 4,500,000 دج</p>
+        <p>وحدات سكنية فاخرة بمساحات تصل إلى 100 متر مربع، مع مرافق متكاملة ومساحات خضراء.</p>
+        <button onclick="openModal('مشروع 200 سكن ترقوي مدعم')">اطلب الآن</button>
+      </div>
+
+      <div class="project">
+        <div class="project-img-container">
+          <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="سكن اقتصادي">
+        </div>
+        <h3>مشروع 80 سكن اقتصادي</h3>
+        <p>الموقع: العوينات — السعر: 2,800,000 دج</p>
+        <p>حلول سكنية اقتصادية بجودة عالية، تتراوح مساحتها بين 50 و65 متر مربع.</p>
+        <button onclick="openModal('مشروع 80 سكن اقتصادي')">اطلب الآن</button>
+      </div>
+
+      <div class="project">
+        <div class="project-img-container">
+          <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="محلات تجارية">
+        </div>
+        <h3>محلات تجارية</h3>
+        <p>الموقع: وسط المدينة — السعر: 6,000,000 دج</p>
+        <p>مساحات تجارية في مواقع استراتيجية، تتراوح بين 30 و150 متر مربع، مثالية للاستثمار.</p>
+        <button onclick="openModal('محلات تجارية')">اطلب الآن</button>
+      </div>
+
+      <div class="project">
+        <div class="project-img-container">
+          <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="فيلا">
+        </div>
+        <h3>فلل فاخرة</h3>
+        <p>الموقع: حي راقٍ — السعر: 15,000,000 دج</p>
+        <p>تصاميم معمارية فريدة، مساحات تبدأ من 200 متر مربع، مع حدائق ومرافق خاصة.</p>
+        <button onclick="openModal('فلل فاخرة')">اطلب الآن</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>من نحن</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>نحن مؤسسة OPGI Promotion لتسيير العقارات بولاية تبسة، نعمل منذ أكثر من 32 عامًا على توفير حلول سكنية بجودة عالية تلبي احتياجات مختلف شرائح المجتمع. نقدم مجموعة متنوعة من الصيغ السكنية بما في ذلك السكن الاجتماعي، السكن الترقوي المدعم، والسكن الاقتصادي.</p>
+        <p>بالإضافة إلى الوحدات السكنية، نطور مشاريع تجارية تشمل المحلات والمكاتب في مواقع استراتيجية بمدينة تبسة. نلتزم بأعلى معايير الجودة والسلامة في جميع مشاريعنا، ونحرص على تسليم الوحدات في المواعيد المحددة.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مبنى OPGI">
+      </div>
+    </div>
+    
+    <div class="features">
+      <div class="feature-box">
+        <i class="fas fa-home"></i>
+        <h3>أكثر من 500 وحدة سكنية</h3>
+        <p>قمنا بتسليم أكثر من 500 وحدة سكنية لعائلات تبسة</p>
+      </div>
+      <div class="feature-box">
+        <i class="fas fa-award"></i>
+        <h3>جودة معتمدة</h3>
+        <p>جميع مشاريعنا تخضع لمعايير الجودة والسلامة الصارمة</p>
+      </div>
+      <div class="feature-box">
+        <i class="fas fa-hand-holding-heart"></i>
+        <h3>تمويل مساعد</h3>
+        <p>نقدم مساعدة في إجراءات التمويل والقروض السكنية</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>اتصل بنا</h2>
+    <form 
+      action="https://formspree.io/f/xldbowqo" 
+      method="POST"
+      onsubmit="handleSubmit(event)"
+    >
+      <input type="text" name="الاسم" placeholder="الاسم" required>
+      <input type="text" name="اللقب" placeholder="اللقب" required>
+      <input type="email" name="البريد الإلكتروني" placeholder="البريد الإلكتروني" required>
+      <input type="tel" name="رقم الهاتف" placeholder="رقم الهاتف">
+      <select name="نوع الاستفسار" required>
+        <option value="">نوع الاستفسار</option>
+        <option value="سكن اجتماعي">استفسار عن سكن اجتماعي</option>
+        <option value="سكن ترقوي">استفسار عن سكن ترقوي مدعم</option>
+        <option value="سكن اقتصادي">استفسار عن سكن اقتصادي</option>
+        <option value="محلات تجارية">استفسار عن محلات تجارية</option>
+        <option value="فلل">استفسار عن فلل</option>
+        <option value="عام">استفسار عام</option>
+      </select>
+      <textarea name="الرسالة" placeholder="رسالتك" rows="5" required></textarea>
+
+      <input type="hidden" name="_subject" value="طلب جديد من موقع OPGI">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+
+      <button type="submit">إرسال الرسالة</button>
+    </form>
+
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.2089900023195!2d8.126289115242292!3d35.41034298024907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f8cb3f2e0b973b%3A0x4e55f8f78522f8e4!2sOPGI%20Tebessa!5e0!3m2!1sar!2sdz!4v1615764834185!5m2!1sar!2sdz" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </section>
+</div>
+
+<div class="floating-btn" onclick="openModal('استفسار عام')">
+  <i class="fas fa-envelope"></i>
+</div>
+
+<footer>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+  </div>
+  <p><i class="fas fa-phone"></i> الهاتف: 0.37.48.19.90</p>
+  <p><i class="fas fa-envelope"></i> البريد الإلكتروني: opgi.tebessa@yahoo.fr</p>
+  <p><i class="fas fa-map-marker-alt"></i> العنوان: شارع الهواء الطلق، تبسة، الجزائر</p>
+  <p>&copy; 2025 OPGI Promotion تبسة - جميع الحقوق محفوظة</p>
+</footer>
+
+<!-- Modal -->
+<div id="requestModal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal()">&times;</button>
+    <h3 id="modalTitle">طلب شراء</h3>
+    <form onsubmit="alert('تم إرسال الطلب بنجاح!'); closeModal(); return false;">
+      <input type="text" placeholder="اللقب" required>
+      <input type="text" placeholder="الاسم" required>
+      <input type="email" placeholder="البريد الإلكتروني" required>
+      <input type="tel" placeholder="رقم الهاتف" required>
+      <input type="text" placeholder="الوظيفة" required>
+      <input type="date" required>
+      <select required>
+        <option value="">الحالة العائلية</option>
+        <option value="أعزب">أعزب</option>
+        <option value="متزوج">متزوج</option>
+        <option value="مطلق">مطلق</option>
+        <option value="أرمل">أرمل</option>
+      </select>
+      <select required>
+        <option value="">بلدية الإقامة</option>
+        <option value="تبسة">تبسة</option>
+        <option value="بئر العاتر">بئر العاتر</option>
+        <option value="العوينات">العوينات</option>
+        <option value="الونزة">الونزة</option>
+        <option value="الشريعة">الشريعة</option>
+      </select>
+      <select required>
+        <option value="">الجنس</option>
+        <option value="ذكر">ذكر</option>
+        <option value="أنثى">أنثى</option>
+      </select>
+      <div style="margin: 1rem 0;">
+        <label>
+          <input type="checkbox" required> أوافق على شروط الخصوصية ومعالجة البيانات
+        </label>
+      </div>
+      <button type="submit">إرسال الطلب</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openModal(projectName) {
+    document.getElementById("modalTitle").innerText = "طلب شراء " + projectName;
+    document.getElementById("requestModal").style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    document.getElementById("requestModal").style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+  
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('requestModal');
+    if (event.target == modal) {
+      closeModal();
+    }
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form)
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('تم إرسال رسالتك بنجاح! سنتواصل معك قريبًا.');
+        form.reset();
+      } else {
+        throw new Error('فشل الإرسال');
+      }
+    })
+    .catch(error => {
+      alert('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى لاحقًا.');
+      console.error(error);
+    });
+  }
+</script>
+
+</body>
+</html>
